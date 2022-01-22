@@ -1,14 +1,14 @@
-from vector import Vector
-from point import Point
+from math import degrees, radians
+from vector import Vector, angle
 
 
 def main() -> None:
-    my_vector1 = Vector(-1, 5, 0)
-    my_vector2 = Vector(3, 2, 8)
+    my_vector1 = Vector(2, -1, -1)
+    my_vector2 = Vector(1, -2, 4)
+    
+    print(degrees(angle(my_vector1, my_vector2)))
+    print(my_vector1.is_perpendicular(my_vector2))
 
-    my_point1 = Point(2, 3, 5)
-
-    my_point1.transition(my_vector1).print()
 
 if __name__ == "__main__":
     main()

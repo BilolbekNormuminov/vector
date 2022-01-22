@@ -1,3 +1,6 @@
+from math import sqrt, acos
+
+
 class Vector:
     """A 3d vector class"""
 
@@ -32,7 +35,7 @@ class Vector:
         else:
             raise TypeError
 
-    def print(self) -> None:
+    def to_str(self) -> str:
         """Print vector in format <x>i + <y>j + <z>k"""
 
         components = {
@@ -41,8 +44,41 @@ class Vector:
             "k": self._k
         }
 
+        s = ""
+
         for component in components:
             if components[component]:
-                print("{magnitude:+}{direction} ".format(magnitude=components[component], direction=component), end="")
+                s += "{magnitude:+}{direction} ".format(magnitude=components[component], direction=component)
 
-        print()
+        return s
+    
+    def magnitude(self) -> float:
+        return sqrt(pow(self._i, 2) + pow(self._j, 2) + pow(self._k, 2))
+
+    def unit_vector(self):
+        return self * (1/self.magnitude())
+    
+    def is_parallel(self, other) -> bool:
+        return True if (self._i / other._i) == (self._j / other._j) == (self._k / other._k) else False
+
+    def is_equal(self, other) -> bool:
+        return True if self._i == other._i and self._j == other._j and self._k == other._k else False
+
+    def is_perpendicular(self, other) -> bool:
+        return True if self * other == 0 else False
+    
+
+
+def angle(vector1: Vector, vector2: Vector) -> float:
+    return acos((vector1 * vector2) / (vector1.magnitude() * vector2.magnitude()))
+
+class Line:
+    """A line represented in vector equation form: a + t(b). Where a and a vectors"""
+
+    def __init__(self, point: Vector, direction: Vector) -> None:
+        self._point = point
+        self._direction = direction
+
+    def to_str(self) -> str:
+        return f"{self._point.to_str()} + t({self._direction.to_str()})"
+    
