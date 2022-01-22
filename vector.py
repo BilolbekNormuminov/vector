@@ -21,7 +21,7 @@ class Vector:
         return self
 
     def __mul__(self, other):
-        if type(other) is int:
+        if type(other) is int or type(other) is float:
             self._i *= other
             self._j *= other
             self._k *= other
