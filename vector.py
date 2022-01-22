@@ -6,6 +6,32 @@ class Vector:
         self._j = j
         self._k = k
 
+    def __add__(self, other):
+        self._i += other._i
+        self._j += other._j
+        self._k += other._k
+
+        return self
+    
+    def __sub__(self, other):
+        self._i -= other._i
+        self._j -= other._j
+        self._k -= other._k
+
+        return self
+
+    def __mul__(self, other):
+        if type(other) is int:
+            self._i *= other
+            self._j *= other
+            self._k *= other
+
+            return self
+        elif type(other) is Vector:
+            return self._i * other._i + self._j * other._j + self._k * other._k
+        else:
+            raise TypeError
+
     def print(self) -> None:
         """Print vector in format <x>i + <y>j + <z>k"""
 
